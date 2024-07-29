@@ -20,7 +20,7 @@ class Eagle:
 class Pegasus(Horse, Eagle):
     def __init__(self, x_distance= 0,  y_distance = 0, horse_sound='Frrr', eagle_sound='I train, eat, sleep, and repeat'):
         Horse.__init__(self, x_distance, horse_sound)
-        Eagle.__init__(self, y_distance, eagle_sound)
+        Eagle.__init__(self, y_distance, eagle_sound) ## вопрос- у нас же методом super можно инициализацию вызвать только первого класса?.  то есть для HORSE я могу его использовать а для EAgle не могу уже???
     def move(self, dx, dy):
         self.run(dx)
         self.fly(dy)
