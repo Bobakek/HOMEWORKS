@@ -11,6 +11,12 @@ class Shop:
     def __init__(self, __file_name='products.txt'):
         self.__file_name = __file_name
 
+    def _ensure_file_exists(self):
+        # Проверка существования файла и его создание при необходимости
+        if not os.path.exists(self.file_name):
+            with open(self.file_name, 'w', encoding='utf-8') as file:
+                pass  # Создаем пустой файл
+
     def get_products(self):
         try:
             with open(self.__file_name, 'r', encoding='utf-8') as file:
