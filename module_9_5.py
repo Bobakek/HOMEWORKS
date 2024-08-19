@@ -33,7 +33,7 @@ except StepValueError:
 
 iter2 = Iterator(-5, 1)
 iter3 = Iterator(6, 15, 2)
-iter4 = Iterator(5, 1, -1)
+iter4 = Iterator(5, 1, -1) #шаг отрицательный не может быть?
 iter5 = Iterator(10, 1)
 
 for i in iter2:
