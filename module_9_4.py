@@ -1,3 +1,11 @@
+# first = 'Мама мыла раму'
+# second = 'Рамена мало было'
+#
+# # Lambda-функция для сравнения символов
+# result = list(map(lambda x, y: x == y, first, second))
+# print(result)
+
+
 # def get_advanced_writer(file_name):
 #     def write_everything(*data_set):
 #         with open(file_name, 'a') as file:
@@ -11,17 +19,14 @@
 # write('Это строчка', ['А', 'это', 'уже', 'число', 5, 'в', 'списке'])
 
 #CALL
+from random import choice
 class MysticBall:
-    def __init__(self, first, second, third):
-        self.first = first
-        self.second = second
-        self.third = third
+    def __init__(self, *args):
+        self.words = args
+
     def __call__(self):
-        words = choice([self.first, self.second, self.third])
-        return words + '!'
+        return choice(self.words)
 first_ball = MysticBall('Да', 'Нет', 'Наверное')
 print(first_ball())
 print(first_ball())
 print(first_ball())
-
-
