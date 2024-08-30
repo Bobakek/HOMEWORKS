@@ -11,30 +11,34 @@ class Iterator:
         self.start = start
         self.stop = stop
         self.step = step
-        self.pointer = start - step
+        self.pointer = start
 
     def __iter__(self):
-        self.pointer = self.start - self.step
+        self.pointer = self.start
         return self
 
     def __next__(self):
-        self.pointer += self.step
-        if self.pointer > self.stop:
+        if (self.step > 0 and self.pointer > self.stop) or (self.step < 0 and self.pointer < self.stop):
             raise StopIteration
-        return self.pointer
+
+        current = self.pointer
+        self.pointer += self.step
+        return current
 
 
+# Пример использования
 try:
-    iter1 = Iterator(100, 200, 0)
+    iter1 = Iterator(100, 200, 0)  # Это вызовет исключение StepValueError
     for i in iter1:
         print(i, end=' ')
 except StepValueError:
     print('Шаг указан неверно')
 
-iter2 = Iterator(-5, 1)
-iter3 = Iterator(6, 15, 2)
-iter4 = Iterator(5, 1, -1) #шаг отрицательный не может быть?
-iter5 = Iterator(10, 1)
+# Остальные примеры
+iter2 = Iterator(-5, 1)  # от -5 до 1 с шагом 1
+iter3 = Iterator(6, 15, 2)  # от 6 до 15 с шагом 2
+iter4 = Iterator(5, 1, -1)  # от 5 до 1 с шагом -1
+iter5 = Iterator(10, 1)  # от 10 до 1 с шагом 1 (шаг по умолчанию)
 
 for i in iter2:
     print(i, end=' ')
@@ -48,3 +52,4 @@ print()
 for i in iter5:
     print(i, end=' ')
 print()
+
