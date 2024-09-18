@@ -24,10 +24,6 @@ def read_info(name):
             print(f"Ошибка чтения файла: {name}")
     return all_data
 
-def process_files(file_paths):
-    with Pool() as pool:
-        results = pool.map(read_info, file_paths)
-    return results
 
 if __name__ == "__main__":
     filenames = [f'./file {number}.txt' for number in range(1, 4)] # Список файлов
