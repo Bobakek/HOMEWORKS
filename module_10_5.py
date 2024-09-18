@@ -4,26 +4,12 @@ from multiprocessing import Pool
 
 def read_info(name):
     all_data = []
-    try:
-
-        with open(name, 'r', encoding='utf-8') as f:
+    with open(name, 'r', encoding='utf-8') as f:
+        line = f.readline()
+        while line:
             line = f.readline()
-            while line:
-                line = f.readline()
-                # all_data.append(line.strip())
-                all_data.append(line[0:-1])
-                line = f.readline()
-    except UnicodeDecodeError:
-        try:
-
-            with open(name, 'r', encoding='cp1252') as f:
-                line = f.readline()
-                while line:
-                    all_data.append(line.strip())
-                    line = f.readline()
-        except UnicodeDecodeError:
-            print(f"Ошибка чтения файла: {name}")
-    return all_data
+            # all_data.append(line.strip())
+            all_data.append(line[0:-1])
 
 
 if __name__ == "__main__":
@@ -40,7 +26,5 @@ if __name__ == "__main__":
         read_info(file)
     finish = time.time()
     print(f"Время выполнения: {finish - start} секунд")
-
-
 
 
