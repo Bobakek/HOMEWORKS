@@ -9,6 +9,7 @@ def read_info(name):
         with open(name, 'r', encoding='utf-8') as f:
             line = f.readline()
             while line:
+                line = f.readline()
                 all_data.append(line.strip())
                 line = f.readline()
     except UnicodeDecodeError:
@@ -29,35 +30,18 @@ def process_files(file_paths):
     return results
 
 if __name__ == "__main__":
-    path = r"C:\Users\Lenovo\IdeaProjects\untitled1\FILES"
-    dir_list = os.listdir(path)
+    filenames = [f'./file {number}.txt' for number in range(1, 4)] # Список файлов
+    start = time.time()
+    with Pool(processes=4) as pool:
+        pool.map(read_info, filenames)  # Запускаем функцию для каждого файла (3.1 секунды)
+    finish = time.time()
+    print(f"Время выполнения: {finish - start} секунд")
 
-    # Преобразуем имена файлов в полный путь и фильтруем только файлы
-    file_paths = [os.path.join(path, file) for file in dir_list if os.path.isfile(os.path.join(path, file))]
-
-    #Проверяем, есть ли файлы в директории
-    if file_paths:
-        start = time.time()  # Начало замера времени
-
-        # Обрабатываем файлы в многопроцессном режиме
-        results = process_files(file_paths)
-
-        end = time.time()  # Конец замера времени
-        res = end - start  # Время выполнения: 6.75562596321106 секунд
-        print(f"Время выполнения: {res} секунд")
-    else:
-        print("В директории нет файлов для чтения.")
+    filenames = [f'./file {number}.txt' for number in range(1, 4)] # Список файлов
+    start = time.time()
+    for file in filenames:
+        read_info(file)
+    finish = time.time()
+    print(f"Время выполнения: {finish - start} секунд")
 
 
-    # if file_paths:
-    #     start = time.time()  # Начало замера времени
-    #
-    #     # Линейно вызываем read_info для каждого файла
-    #     for file in file_paths:
-    #         read_info(file)
-    #
-    #     end = time.time()  # Конец замера времени
-    #     res = end - start  # Разница времени  Время выполнения (линейно): 4.397747039794922 секунд
-    #     print(f"Время выполнения (линейно): {res} секунд")
-    # else:
-    #     print("В директории нет файлов для чтения.")
