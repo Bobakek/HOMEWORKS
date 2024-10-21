@@ -26,7 +26,7 @@ users = [
 ]
 cursor.executemany('INSERT INTO Users (username, email, age, balance) VALUES  (?,?,?,?)', users)
 cursor.execute('UPDATE Users SET balance = 500 WHERE id %2 = 1')
-cursor.execute('DELETE FROM Users WHERE id %3 = 0')
+cursor.execute('DELETE FROM Users WHERE id %3 = 1')
 cursor.execute('SELECT * FROM Users WHERE age !=60')
 users = cursor.fetchall()
 for user in users:
